@@ -2,11 +2,11 @@
 django-modeltranslation-wagtail
 =============================
 
-.. image:: https://badge.fury.io/py/modeltranslation_wagtail.png
-    :target: http://badge.fury.io/py/modeltranslation_wagtail
+.. image:: https://badge.fury.io/py/django-modeltranslation-wagtail.png
+    :target: http://badge.fury.io/py/django-modeltranslation-wagtail
 
-.. image:: https://travis-ci.org/benjaoming/modeltranslation_wagtail.png?branch=master
-    :target: https://travis-ci.org/benjaoming/modeltranslation_wagtail
+.. image:: https://travis-ci.org/benjaoming/django-modeltranslation-wagtail.png?branch=master
+    :target: https://travis-ci.org/benjaoming/django-modeltranslation-wagtail
 
 
 The glue between django-modeltranslation and wagtail
