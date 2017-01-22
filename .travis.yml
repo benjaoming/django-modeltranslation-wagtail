@@ -19,6 +19,7 @@ addons:
 env:
 - TOXENV=py27
 - TOXENV=py35
+- TOXENV=style
 
 install:
   - pip install tox>=2.1
