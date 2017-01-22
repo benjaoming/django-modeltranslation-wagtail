@@ -1,5 +1,5 @@
-from modeltranslation.translator import TranslationOptions as TranslationOptionsOrig,\
-    AlreadyRegistered
+from modeltranslation.translator import TranslationOptions as TranslationOptionsOrig  # noqa
+from modeltranslation.translator import AlreadyRegistered
 from modeltranslation.translator import translator
 
 from wagtail.wagtailcore.models import Page
@@ -14,7 +14,7 @@ except AlreadyRegistered:
 
 
 class TranslationOptions(TranslationOptionsOrig):
-    
+
     def __init__(self, *args, **kwargs):
         """
         Create fields dicts without any translation fields.

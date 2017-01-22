@@ -2,7 +2,6 @@
 Tests for `modeltranslation_wagtail` module.
 """
 import pytest
-from modeltranslation_wagtail import modeltranslation_wagtail
 
 
 class TestModeltranslation_wagtail(object):
@@ -12,6 +11,7 @@ class TestModeltranslation_wagtail(object):
         pass
 
     def test_something(self):
+        from modeltranslation_wagtail import translator
         pass
 
     @classmethod
