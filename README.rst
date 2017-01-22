@@ -19,7 +19,7 @@ Features
 --------
 
 * Field-based translation for Wagtail using django-modeltranslation
-* Makes translated fields easily accessible to the Wagtail admin.
+* **TODO** Makes translated fields easily accessible to the Wagtail admin.
 * Sensible to the currently activated language.
 
 When to use this
