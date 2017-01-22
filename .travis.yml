@@ -6,11 +6,13 @@ python:
   - "3.5"
   - "2.7"
 
-# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-install: 
-  - pip install -r requirements.txt
-  - pip install pytest pytest-django
+# See tox.ini for env list
+env:
+- TOXENV=py27
+- TOXENV=py35
 
-# command to run tests, e.g. python setup.py test
+install:
+  - pip install tox>=2.1
+
 script:
-  - py.test --ds=test.django_settings
+  - tox -e $TOXENV
