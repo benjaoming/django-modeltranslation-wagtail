@@ -22,7 +22,7 @@ The full documentation is at http://modeltranslation_wagtail.rtfd.org."""
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
-    name='modeltranslation_wagtail',
+    name='django-modeltranslation-wagtail',
     version='0.1.0',
     description='The glue between django-modeltranslation and wagtail',
     long_description=readme + '\n\n' + doclink + '\n\n' + history,
