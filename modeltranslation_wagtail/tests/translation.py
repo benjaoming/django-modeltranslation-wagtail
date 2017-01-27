@@ -4,7 +4,12 @@ from __future__ import absolute_import
 from django import VERSION
 from django.utils.translation import ugettext_lazy
 
-from .tests.models import (
+from modeltranslation.translator import register
+
+from modeltranslation_wagtail.translator import translator, \
+    TranslationOptions
+
+from .models import (
     TestModel, FallbackModel, FallbackModel2, FileFieldsModel, ForeignKeyModel,
     OtherFieldsModel, DescriptorModel, AbstractModelA, AbstractModelB, Slugged,
     MetaData, Displayable, Page, RichText, RichTextPage, MultitableModelA,
@@ -18,7 +23,6 @@ from .tests.models import (
     ImageChooserPanelSnippet, FieldRowPanelSnippet, MultiFieldPanelSnippet,
     PageInlineModel, BaseInlineModel, StreamFieldPanelPage,
     StreamFieldPanelSnippet, SnippetInlineModel, InlinePanelSnippet)
-from .translator import translator, register, TranslationOptions
 
 
 class TestTranslationOptions(TranslationOptions):

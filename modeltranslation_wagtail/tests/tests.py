@@ -17,8 +17,9 @@ except ImportError:
     from django.db.models.loading import AppCache
     NEW_APP_CACHE = False
 
-from . import settings as mt_settings, translator
-from .tests.test_settings import TEST_SETTINGS
+from modeltranslation import settings as mt_settings
+from modeltranslation_wagtail import translator
+from .test_settings import TEST_SETTINGS
 
 MIGRATE_CMD = django.VERSION >= (1, 8)
 MIGRATIONS = MIGRATE_CMD and "django.contrib.auth" in TEST_SETTINGS[
@@ -125,12 +126,12 @@ class ModeltranslationTransactionTestBase(TransactionTestCase):
                 imp.reload(translator)
 
                 # reload the translation module to register the Page model
-                from . import translation as wag_trans
+                from modeltranslation_wagtail import translator as wag_trans
                 imp.reload(wag_trans)
 
                 # Reload the patching class to update the imported translator
                 # in order to include the newly registered models
-                from . import patch_wagtailadmin
+                from modeltranslation_wagtail import patch_wagtailadmin
                 imp.reload(patch_wagtailadmin)
 
                 # 3. Reset test models (because autodiscover have already run,
@@ -157,7 +158,8 @@ class ModeltranslationTransactionTestBase(TransactionTestCase):
                             cls.cache.all_models['auth'])
 
                 # 4. Autodiscover
-                from .models import handle_translation_registrations
+                from modeltranslation_wagtail.models import \
+                    handle_translation_registrations
                 handle_translation_registrations()
 
                 # 5. makemigrations (``migrate=False`` in case of south)
@@ -191,8 +193,7 @@ class ModeltranslationTransactionTestBase(TransactionTestCase):
                 # and loaded (that's why this is not imported in normal import
                 # section)
                 global models, translation
-                from .tests import models as t_models, \
-                    translation as t_translation
+                from . import models as t_models, translation as t_translation
                 models = t_models
                 translation = t_translation
 
