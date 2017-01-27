@@ -38,95 +38,84 @@ class PatchTestPageTranslationOptions(TranslationOptions):
     fields = ('description',)
 
 
-class PatchTestSnippetTranslationOptionsOrig(TranslationOptionsOrig):
+@register(PatchTestSnippet)
+class PatchTestSnippetTranslationOptions(TranslationOptionsOrig):
     fields = ('name',)
-
-
-translator.register(PatchTestSnippet, PatchTestSnippetTranslationOptionsOrig)
 
 
 # ######### Panel Patching Models
 
-class FieldPanelTranslationOptions(TranslationOptions):
+@register(FieldPanelPage)
+class FieldPanelPageTranslationOptions(TranslationOptions):
     fields = ('name',)
 
 
-class FieldPanelTranslationOptionsOrig(TranslationOptionsOrig):
+@register(FieldPanelSnippet)
+class FieldPanelSnippetTranslationOptions(TranslationOptionsOrig):
     fields = ('name',)
 
 
-translator.register(FieldPanelPage, FieldPanelTranslationOptions)
-translator.register(FieldPanelSnippet, FieldPanelTranslationOptionsOrig)
-
-
-class ImageChooserPanelTranslationOptions(TranslationOptions):
+@register(ImageChooserPanelPage)
+class ImageChooserPanelPageTranslationOptions(TranslationOptions):
     fields = ('image',)
 
 
-class ImageChooserPanelTranslationOptionsOrig(TranslationOptionsOrig):
+@register(ImageChooserPanelSnippet)
+class ImageChooserPanelSnippetTranslationOptions(TranslationOptionsOrig):
     fields = ('image',)
 
-translator.register(ImageChooserPanelPage, ImageChooserPanelTranslationOptions)
-translator.register(ImageChooserPanelSnippet,
-                    ImageChooserPanelTranslationOptionsOrig)
 
-
-class FieldRowPanelTranslationOptions(TranslationOptions):
+@register(FieldRowPanelPage)
+class FieldRowPanelPageTranslationOptions(TranslationOptions):
     fields = ('other_name',)
 
 
-class FieldRowPanelTranslationOptionsOrig(TranslationOptionsOrig):
+@register(FieldRowPanelSnippet)
+class FieldRowPanelSnippetTranslationOptions(TranslationOptionsOrig):
     fields = ('other_name',)
 
 
-translator.register(FieldRowPanelPage, FieldRowPanelTranslationOptions)
-translator.register(FieldRowPanelSnippet, FieldRowPanelTranslationOptionsOrig)
-
-
-class StreamFieldPanelTranslationOptions(TranslationOptions):
+@register(StreamFieldPanelPage)
+class StreamFieldPanelPageTranslationOptions(TranslationOptions):
     fields = ('body',)
 
 
-class StreamFieldPanelTranslationOptionsOrig(TranslationOptionsOrig):
+@register(StreamFieldPanelSnippet)
+class StreamFieldPanelSnippetTranslationOptions(TranslationOptionsOrig):
     fields = ('body',)
 
 
-translator.register(StreamFieldPanelPage, StreamFieldPanelTranslationOptions)
-translator.register(StreamFieldPanelSnippet,
-                    StreamFieldPanelTranslationOptionsOrig)
+# TODO: check out how translator.register works for this one
 
-
-class MultiFieldPanelTranslationOptions(TranslationOptions):
-    fields = ()
-
-
-class MultiFieldPanelTranslationOptionsOrig(TranslationOptionsOrig):
+class MultiFieldPanelTranslationOptions(TranslationOptionsOrig):
     fields = ()
 
 
 translator.register(MultiFieldPanelPage, MultiFieldPanelTranslationOptions)
 translator.register(MultiFieldPanelSnippet,
-                    MultiFieldPanelTranslationOptionsOrig)
+                    MultiFieldPanelTranslationOptions)
+
+# end TODO
 
 
-class BaseInlinePanelTranslationOptionsOrig(TranslationOptionsOrig):
+@register(BaseInlineModel)
+class BaseInlineModelTranslationOptions(TranslationOptionsOrig):
     fields = ('field_name', 'image_chooser', 'fieldrow_name',)
 
 
-translator.register(BaseInlineModel, BaseInlinePanelTranslationOptionsOrig)
-
-
-class InlinePanelTranslationOptionsOrig(TranslationOptionsOrig):
+class InlinePanelTranslationOptions(TranslationOptionsOrig):
     fields = ()
 
 
-translator.register(PageInlineModel, InlinePanelTranslationOptionsOrig)
-translator.register(SnippetInlineModel, InlinePanelTranslationOptionsOrig)
+translator.register(PageInlineModel, InlinePanelTranslationOptions)
+translator.register(SnippetInlineModel, InlinePanelTranslationOptions)
 
 
 @register(InlinePanelPage)
-class InlinePanelModelTranslationOptionsOrig(TranslationOptionsOrig):
+class InlinePanelPageModelTranslationOptions(TranslationOptions):
     fields = ()
 
 
-translator.register(InlinePanelSnippet, InlinePanelModelTranslationOptionsOrig)
+@register(InlinePanelSnippet)
+class InlinePanelSnippetModelTranslationOptions(TranslationOptionsOrig):
+    fields = ()
