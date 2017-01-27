@@ -91,7 +91,8 @@ class StreamFieldPanelSnippet(models.Model):
 
 
 @register_snippet
-class MultiFieldPanelSnippet(FieldPanelSnippet, ImageChooserPanelSnippet, FieldRowPanelSnippet):
+class MultiFieldPanelSnippet(FieldPanelSnippet, ImageChooserPanelSnippet,
+                             FieldRowPanelSnippet):
     panels = [
         MultiFieldPanel(
             FieldPanelSnippet.panels
@@ -173,7 +174,8 @@ class StreamFieldPanelPage(WagtailPage):
     ]
 
 
-class MultiFieldPanelPage(FieldPanelPage, ImageChooserPanelPage, FieldRowPanelPage):
+class MultiFieldPanelPage(FieldPanelPage, ImageChooserPanelPage,
+                          FieldRowPanelPage):
     content_panels = [
         MultiFieldPanel(
             FieldPanelPage.content_panels

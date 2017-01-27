@@ -5,7 +5,6 @@ import imp
 import os
 
 import django
-from django.apps import apps as django_apps
 from django.core.exceptions import ValidationError
 from django.core.management import call_command
 from django.test import TestCase, TransactionTestCase
@@ -38,7 +37,10 @@ TEST_MODELS = 50 + (1 if MIGRATIONS else 0)
 
 
 class reload_override_settings(override_settings):
-    """Context manager that not only override settings, but also reload modeltranslation conf."""
+    """
+    Context manager that not only override settings, but also reload
+    modeltranslation conf.
+    """
 
     def __enter__(self):
         super(reload_override_settings, self).__enter__()
@@ -72,9 +74,11 @@ def get_field_names(model):
     names = set()
     fields = model._meta.get_fields()
     for field in fields:
-        if field.is_relation and field.many_to_one and field.related_model is None:
+        if field.is_relation and field.many_to_one and \
+           field.related_model is None:
             continue
-        if field.model != model and field.model._meta.concrete_model == model._meta.concrete_model:
+        if field.model != model and \
+           field.model._meta.concrete_model == model._meta.concrete_model:
             continue
 
         names.add(field.name)
@@ -93,8 +97,8 @@ class ModeltranslationTransactionTestBase(TransactionTestCase):
         """
         Prepare database:
         * Call syncdb to create tables for tests.models (since during
-        default testrunner's db creation wagtail_modeltranslation.tests was 
-        not in INSTALLED_APPS
+        default testrunner's db creation wagtail_modeltranslation.tests
+        was not in INSTALLED_APPS
         """
         super(ModeltranslationTransactionTestBase, cls).setUpClass()
         if not ModeltranslationTransactionTestBase.synced:
@@ -194,8 +198,12 @@ class ModeltranslationTransactionTestBase(TransactionTestCase):
 
                 from django.db import connections, DEFAULT_DB_ALIAS
                 # 6. Syncdb
-                call_command('migrate', verbosity=0, migrate=False, interactive=False, run_syncdb=True,
-                             database=connections[DEFAULT_DB_ALIAS].alias, load_initial_data=False)
+                call_command(
+                    'migrate', verbosity=0, migrate=False, interactive=False,
+                    run_syncdb=True,
+                    database=connections[DEFAULT_DB_ALIAS].alias,
+                    load_initial_data=False
+                )
 
     def setUp(self):
         self._old_language = get_language()
@@ -298,7 +306,8 @@ class WagtailModeltranslationTest(TestCase,
 
         # Fetch one of the streamfield panels to see if the block was correctly
         # created
-        child_block = models.StreamFieldPanelPage.body_en.field.stream_block.child_blocks.items()
+        child_block = models.StreamFieldPanelPage.body_en.field.stream_block. \
+            child_blocks.items()
 
         self.assertEquals(len(child_block), 1)
 
@@ -378,8 +387,7 @@ class WagtailModeltranslationTest(TestCase,
         form was correctly patched
         """
         try:
-            from wagtail.wagtailadmin.views.pages import get_page_edit_handler, \
-                PAGE_EDIT_HANDLERS
+            from wagtail.wagtailadmin.views.pages import get_page_edit_handler
         except ImportError:
             pass
 
@@ -447,7 +455,7 @@ class WagtailModeltranslationTest(TestCase,
         site.save()
 
         # Add children to the root
-        child = root.add_child(
+        root.add_child(
             instance=models.TestSlugPage1(
                 title='child1', slug_de='child', slug_en='child-en', depth=2,
                 path='00010001')
