@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import
+from __future__ import absolute_import, unicode_literals
 
 import imp
 import os
+from six import iteritems, assertCountEqual
 
 import django
 from django.core.exceptions import ValidationError
@@ -307,14 +308,16 @@ class WagtailModeltranslationTest(TestCase,
 
         # Fetch one of the streamfield panels to see if the block was correctly
         # created
-        child_block = models.StreamFieldPanelPage.body_en.field.stream_block. \
-            child_blocks.items()
 
-        self.assertEquals(len(child_block), 1)
+        child_blocks = models.StreamFieldPanelPage.body_en.field. \
+            stream_block.child_blocks
+        child_block = next(iteritems(child_blocks))
+
+        self.assertEquals(len(child_blocks), 1)
 
         from wagtail.wagtailcore.blocks import CharBlock
-        self.assertEquals(child_block[0][0], 'text')
-        self.assertIsInstance(child_block[0][1], CharBlock)
+        self.assertEquals(child_block[0], 'text')
+        self.assertIsInstance(child_block[1], CharBlock)
 
     def check_multipanel_patching(self, panels):
         # There are three multifield panels, one for each of the available
@@ -401,10 +404,10 @@ class WagtailModeltranslationTest(TestCase,
         page_base_fields = [
             'slug_de', 'slug_en', 'seo_title_de', 'seo_title_en',
             'search_description_de', 'search_description_en',
-            u'show_in_menus', u'go_live_at', u'expire_at'
+            'show_in_menus', 'go_live_at', 'expire_at'
         ]
 
-        self.assertItemsEqual(page_base_fields, form.base_fields.keys())
+        assertCountEqual(self, page_base_fields, form.base_fields.keys())
 
         inline_model_fields = [
             'field_name_de', 'field_name_en', 'image_chooser_de',
@@ -415,8 +418,8 @@ class WagtailModeltranslationTest(TestCase,
 
         related_formset_form = form.formsets['related_page_model'].form
 
-        self.assertItemsEqual(inline_model_fields,
-                              related_formset_form.base_fields.keys())
+        assertCountEqual(self, inline_model_fields,
+                         related_formset_form.base_fields.keys())
 
     def test_snippet_form(self):
         """
@@ -440,8 +443,8 @@ class WagtailModeltranslationTest(TestCase,
 
         related_formset_form = form.formsets['related_snippet_model'].form
 
-        self.assertItemsEqual(inline_model_fields,
-                              related_formset_form.base_fields.keys())
+        assertCountEqual(self, inline_model_fields,
+                         related_formset_form.base_fields.keys())
 
     def test_duplicate_slug(self):
         from wagtail.wagtailcore.models import Site
@@ -486,4 +489,4 @@ class WagtailModeltranslationTest(TestCase,
             searchfield.field_name
             for searchfield in models.PatchTestPage.search_fields]
 
-        self.assertItemsEqual(expected_fields, model_search_fields)
+        assertCountEqual(self, expected_fields, model_search_fields)
