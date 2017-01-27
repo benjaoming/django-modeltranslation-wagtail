@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
+
 from django.apps import AppConfig
 
 
@@ -7,5 +9,5 @@ class ModeltranslationWagtailConfig(AppConfig):
     verbose_name = 'Modeltranslation Wagtail'
 
     def ready(self):
-        from modeltranslation_wagtail.models import handle_translation_registrations
+        from .models import handle_translation_registrations
         handle_translation_registrations()

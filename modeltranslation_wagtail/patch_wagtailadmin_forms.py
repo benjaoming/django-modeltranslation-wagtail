@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
+
 from django import forms
 from django.conf import settings
 from django.utils.translation import ugettext as _
@@ -20,7 +22,7 @@ class WagtailModeltranslationAdminPageForm(WagtailAdminPageForm):
         cleaned_data = super(
             WagtailModeltranslationAdminPageForm, self).clean()
 
-        from modeltranslation_wagtail.patch_wagtailadmin import _validate_slugs
+        from .patch_wagtailadmin import _validate_slugs
 
         slugs_to_check = {}
         for isocode, description in settings.LANGUAGES:
@@ -120,7 +122,7 @@ class NewCopyForm(CopyForm):
         parent_page = cleaned_data.get(
             'new_parent_page') or self.page.get_parent()
 
-        from modeltranslation_wagtail.patch_wagtailadmin import _validate_slugs
+        from .patch_wagtailadmin import _validate_slugs
 
         slugs_to_check = {}
         for isocode, description in settings.LANGUAGES:

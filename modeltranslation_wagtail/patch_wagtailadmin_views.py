@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
+
 from django.conf import settings
 
 from django.core.exceptions import PermissionDenied
@@ -9,7 +11,7 @@ from wagtail.wagtailcore.models import Page
 from wagtail.wagtailadmin import messages
 from wagtail.wagtailadmin.views.pages import get_valid_next_url_from_request
 
-from modeltranslation_wagtail.patch_wagtailadmin_forms import NewCopyForm
+from .patch_wagtailadmin_forms import NewCopyForm
 
 
 # Copied from wagtail.wagtailadmin.views.pages.copy for these modifications

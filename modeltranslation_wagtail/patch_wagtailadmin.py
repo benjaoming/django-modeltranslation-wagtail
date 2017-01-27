@@ -1,8 +1,15 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
+
 import copy
 import logging
 import operator
 import inspect
+from six import iteritems
+try:
+    from functools import reduce
+except ImportError:
+    pass
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
@@ -31,7 +38,7 @@ except ImportError:
 from modeltranslation.translator import translator, NotRegistered
 from modeltranslation.utils import build_localized_fieldname
 
-from modeltranslation_wagtail.patch_wagtailadmin_forms import WagtailModeltranslationAdminPageForm
+from .patch_wagtailadmin_forms import WagtailModeltranslationAdminPageForm
 
 logger = logging.getLogger('wagtail.core')
 
@@ -105,7 +112,7 @@ class WagtailTranslator(object):
                 f.required = True
 
         # Do the same to the formsets
-        for related_name, formset in form.formsets.iteritems():
+        for related_name, formset in iteritems(form.formsets):
             if (formset.model in WagtailTranslator._required_fields and
                     WagtailTranslator._required_fields[formset.model]):
                 for fname, f in formset.form.base_fields.items():
@@ -217,7 +224,7 @@ class WagtailTranslator(object):
                 if fname == field_name:
                     return f.required
         else:
-            for related_name, formset in cls._base_model_form.formsets.iteritems():
+            for related_name, formset in iteritems(cls._base_model_form.formsets):
                 if formset.model == cls._current_model:
                     for fname, f in formset.form.base_fields.items():
                         if fname == field_name:

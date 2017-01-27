@@ -1,9 +1,11 @@
+from __future__ import absolute_import
+
 import django
 
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsnippets.models import get_snippet_models
 
-from modeltranslation_wagtail.patch_wagtailadmin import WagtailTranslator
+from .patch_wagtailadmin import WagtailTranslator
 
 
 def autodiscover():
