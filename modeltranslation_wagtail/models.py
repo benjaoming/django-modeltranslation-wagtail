@@ -17,8 +17,13 @@ def autodiscover():
     import os
     import sys
     import copy
+
     from django.conf import settings
     from django.utils.module_loading import module_has_submodule
+
+    from wagtail.wagtailcore.fields import StreamField
+
+    from modeltranslation import fields
     from modeltranslation.translator import translator
     from modeltranslation.settings import TRANSLATION_FILES, DEBUG
 
@@ -30,6 +35,9 @@ def autodiscover():
         from django.apps import apps
         mods = [(app_config.name, app_config.module)
                 for app_config in apps.get_app_configs()]
+
+    # Patch SUPPORTED_FIELDS to support StreamField
+    fields.SUPPORTED_FIELDS += (StreamField,)
 
     for (app, mod) in mods:
         # Attempt to import the app's translation module.
