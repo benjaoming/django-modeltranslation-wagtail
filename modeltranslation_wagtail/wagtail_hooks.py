@@ -115,6 +115,7 @@ def streamfields_translation_copy():
 
 @hooks.register('insert_editor_css')
 def modeltranslation_page_editor_css():
-    return format_html('<link rel="stylesheet" href="'
-                       + settings.STATIC_URL
-                       + 'modeltranslation_wagtail/css/page_editor_modeltranslation.css" >')
+    return format_html(
+        '<link rel="stylesheet" href="'
+        + settings.STATIC_URL
+        + 'modeltranslation_wagtail/css/page_editor_modeltranslation.css" >')

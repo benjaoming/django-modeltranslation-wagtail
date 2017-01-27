@@ -15,7 +15,8 @@ from .patch_wagtailadmin_forms import NewCopyForm
 
 
 # Copied from wagtail.wagtailadmin.views.pages.copy for these modifications
-# - change data in update_attrs dict (use language fields instead of the original ones)
+# - change data in update_attrs dict (use language fields instead of the
+#   original ones)
 # - add settings.LANGUAGES to the template context
 # - make use of the NewCopyForm (patch of the original CopyForm)
 def new_copy(request, page_id):
@@ -36,9 +37,9 @@ def new_copy(request, page_id):
 
     # Check if user is submitting
     if request.method == 'POST':
-        # Prefill parent_page in case the form is invalid (as prepopulated value for the form field,
-        # because ModelChoiceField seems to not fall back to the user given
-        # value)
+        # Prefill parent_page in case the form is invalid (as prepopulated
+        # value for the form field, because ModelChoiceField seems to not fall
+        # back to the user given value)
         parent_page = Page.objects.get(id=request.POST['new_parent_page'])
 
         if form.is_valid():
@@ -47,7 +48,8 @@ def new_copy(request, page_id):
                 parent_page = form.cleaned_data['new_parent_page']
 
             # Make sure this user has permission to add subpages on the parent
-            if not parent_page.permissions_for_user(request.user).can_add_subpage():
+            if not parent_page.permissions_for_user(request.user) \
+                              .can_add_subpage():
                 raise PermissionDenied
 
             # Re-check if the user has permission to publish subpages on the
@@ -58,7 +60,8 @@ def new_copy(request, page_id):
             update_attrs = {}
             for isocode, description in settings.LANGUAGES:
                 for fieldname in ['title', 'slug']:
-                    update_attrs['%s_%s' % (fieldname, isocode)] = form.cleaned_data[
+                    update_attrs[
+                        '%s_%s' % (fieldname, isocode)] = form.cleaned_data[
                         'new_%s_%s' % (fieldname, isocode)]
 
             # Copy the page

@@ -13,7 +13,8 @@ from wagtail.wagtailcore.models import Page
 
 class WagtailModeltranslationAdminPageForm(WagtailAdminPageForm):
 
-    def __init__(self, data=None, files=None, parent_page=None, *args, **kwargs):
+    def __init__(self, data=None, files=None, parent_page=None,
+                 *args, **kwargs):
         super(WagtailModeltranslationAdminPageForm, self).__init__(
             data, files, parent_page, *args, **kwargs)
 
@@ -94,13 +95,15 @@ class NewCopyForm(CopyForm):
                 # the field label and help text
                 if subpage_count == 0:
                     label = _("Publish copied page")
-                    help_text = _(
-                        "This page is live. Would you like to publish its copy as well?")
+                    help_text = _("This page is live. Would you like to "
+                                  "publish its copy  as well?")
                 else:
                     label = _("Publish copies")
                     help_text = ungettext(
-                        "%(count)s of the pages being copied is live. Would you like to publish its copy?",
-                        "%(count)s of the pages being copied are live. Would you like to publish their copies?",
+                        "%(count)s of the pages being copied is live. Would "
+                        "you like to publish its copy?",
+                        "%(count)s of the pages being copied are live. Would "
+                        "you like to publish their copies?",
                         pages_to_publish_count) % {
                             'count': pages_to_publish_count
                     }
@@ -137,7 +140,8 @@ class NewCopyForm(CopyForm):
                 exclude_self=False).items():
             formfieldname = 'new_%s' % slugfield
             self._errors[formfieldname] = self.error_class(
-                [_("This slug is already in use within the context of its parent page \"%s\"" % parent_page)]
+                [_("This slug is already in use within the context of its "
+                   "parent page \"%s\"" % parent_page)]
             )
             # The slug is no longer valid, hence remove it from cleaned_data
             del cleaned_data[formfieldname]

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import absolute_import
+from __future__ import absolute_import, unicode_literals
 
 import copy
 import logging
@@ -116,7 +116,8 @@ class WagtailTranslator(object):
             if (formset.model in WagtailTranslator._required_fields and
                     WagtailTranslator._required_fields[formset.model]):
                 for fname, f in formset.form.base_fields.items():
-                    if fname in WagtailTranslator._required_fields[formset.model]:
+                    if fname in WagtailTranslator._required_fields[
+                            formset.model]:
                         f.required = True
 
         # Overide page methods
@@ -191,8 +192,8 @@ class WagtailTranslator(object):
         """
 
         WagtailTranslator._current_model = model
-        WagtailTranslator._translation_options = translator.get_options_for_model(
-            model)
+        WagtailTranslator._translation_options = translator. \
+            get_options_for_model(model)
         if model not in WagtailTranslator._required_fields:
             WagtailTranslator._required_fields[model] = []
 
@@ -224,7 +225,8 @@ class WagtailTranslator(object):
                 if fname == field_name:
                     return f.required
         else:
-            for related_name, formset in iteritems(cls._base_model_form.formsets):
+            for related_name, formset in iteritems(
+                    cls._base_model_form.formsets):
                 if formset.model == cls._current_model:
                     for fname, f in formset.form.base_fields.items():
                         if fname == field_name:
@@ -248,11 +250,14 @@ class WagtailTranslator(object):
             for lang in settings.LANGUAGES:
                 classes = fieldpanel.classname
 
-                if cls._is_orig_required(fieldpanel.field_name) and (lang[0] == settings.LANGUAGE_CODE):
-                    if (build_localized_fieldname(fieldpanel.field_name, lang[0]) not in
+                if cls._is_orig_required(fieldpanel.field_name) and \
+                   (lang[0] == settings.LANGUAGE_CODE):
+                    if (build_localized_fieldname(
+                            fieldpanel.field_name, lang[0]) not in
                             cls._required_fields[cls._current_model]):
                         cls._required_fields[cls._current_model].append(
-                            build_localized_fieldname(fieldpanel.field_name, lang[0]))
+                            build_localized_fieldname(
+                                fieldpanel.field_name, lang[0]))
 
                 translated_field_name = build_localized_fieldname(
                     fieldpanel.field_name, lang[0])
@@ -279,8 +284,10 @@ class WagtailTranslator(object):
         if imagechooser.field_name in tr_fields:
             for lang in settings.LANGUAGES:
 
-                if cls._is_orig_required(imagechooser.field_name) and (lang[0] == settings.LANGUAGE_CODE):
-                    if (build_localized_fieldname(imagechooser.field_name, lang[0]) not in
+                if cls._is_orig_required(imagechooser.field_name) and \
+                   (lang[0] == settings.LANGUAGE_CODE):
+                    if (build_localized_fieldname(
+                            imagechooser.field_name, lang[0]) not in
                             cls._required_fields[cls._current_model]):
                         cls._required_fields[cls._current_model].append(
                             build_localized_fieldname(
@@ -308,8 +315,10 @@ class WagtailTranslator(object):
         translated_fieldpanels = []
         if fieldpanel.field_name in tr_fields:
             for lang in settings.LANGUAGES:
-                if cls._is_orig_required(fieldpanel.field_name) and (lang[0] == settings.LANGUAGE_CODE):
-                    if (build_localized_fieldname(fieldpanel.field_name, lang[0]) not in
+                if cls._is_orig_required(fieldpanel.field_name) and \
+                   (lang[0] == settings.LANGUAGE_CODE):
+                    if (build_localized_fieldname(
+                            fieldpanel.field_name, lang[0]) not in
                             cls._required_fields[cls._current_model]):
                         cls._required_fields[cls._current_model].append(
                             build_localized_fieldname(
@@ -344,7 +353,8 @@ class WagtailTranslator(object):
             else:
                 patched_fields.append(panel)
 
-        return MultiFieldPanel(patched_fields, classname=mfpanel.classname, heading=mfpanel.heading)
+        return MultiFieldPanel(patched_fields, classname=mfpanel.classname,
+                               heading=mfpanel.heading)
 
     @classmethod
     def _patch_fieldrowpanel(cls, frpanel):
@@ -372,17 +382,20 @@ class WagtailTranslator(object):
 
         try:
             inline_panels = getattr(
-                getattr(relation, related_fieldname).related_model, 'panels', [])
+                getattr(relation, related_fieldname).related_model,
+                'panels', [])
         except AttributeError:
             related_fieldname = 'rel'
             inline_panels = getattr(
-                getattr(relation, related_fieldname).related_model, 'panels', [])
+                getattr(relation, related_fieldname).related_model,
+                'panels', [])
 
         try:
             related_model = getattr(
-                getattr(model, panel.relation_name), related_fieldname).related_model
-            WagtailTranslator._translation_options = translator.get_options_for_model(
-                related_model)
+                getattr(model, panel.relation_name),
+                related_fieldname).related_model
+            WagtailTranslator._translation_options = translator. \
+                get_options_for_model(related_model)
         except NotRegistered:
             return None
         translated_inline = []
@@ -398,14 +411,14 @@ class WagtailTranslator(object):
 @transaction.atomic  # only commit when all descendants are properly updated
 def _new_move(self, target, pos=None):
     """
-    Extension to the treebeard 'move' method to ensure that url_path is updated too.
+    Extension to the treebeard 'move' method to ensure that url_path is
+    updated too.
     """
     old_url_path = Page.objects.get(id=self.id).url_path
     super(Page, self).move(target, pos=pos)
-    # treebeard's move method doesn't actually update the in-memory instance, so we need to work
-    # with a freshly loaded one now
-    # added .specific to use the most specific class so that url_paths are
-    # updated to all languages
+    # treebeard's move method doesn't actually update the in-memory instance,
+    # so we need to work with a freshly loaded one now added .specific to use
+    # the most specific class so that url_paths are updated to all languages
     new_self = Page.objects.get(id=self.id).specific
     new_url_path = new_self.set_url_path(new_self.get_parent())
     new_self.save()
@@ -434,7 +447,8 @@ def _new_set_url_path(self, parent):
                     hasattr(self, 'slug_' + settings.LANGUAGE_CODE) else \
                     getattr(self, 'slug')
 
-            if hasattr(parent, 'url_path_' + lang[0]) and getattr(parent, 'url_path_' + lang[0]) is not None:
+            if hasattr(parent, 'url_path_' + lang[0]) and \
+               getattr(parent, 'url_path_' + lang[0]) is not None:
                 parent_url_path = getattr(parent, 'url_path_' + lang[0])
             else:
                 parent_url_path = getattr(parent, 'url_path')
@@ -506,8 +520,9 @@ def _new_get_site_root_paths():
     Site.get_site_root_paths()
     """
     result = [
-        (site.id, site.root_page.specific.url_path, site.root_url)
-        for site in Site.objects.select_related('root_page').order_by('-root_page__url_path')
+        (site.id, site.root_page.specific.url_path, site.root_url) for site in
+        Site.objects.select_related(
+            'root_page').order_by('-root_page__url_path')
     ]
 
     return result
@@ -515,28 +530,29 @@ def _new_get_site_root_paths():
 
 def _new_relative_url(self, current_site):
     """
-    Return the 'most appropriate' URL for this page taking into account the site we're currently on;
-    a local URL if the site matches, or a fully qualified one otherwise.
-    Return None if the page is not routable.
+    Return the 'most appropriate' URL for this page taking into account the
+    site we're currently on; a local URL if the site matches, or a fully
+    qualified one otherwise. Return None if the page is not routable.
 
     Override for using custom get_site_root_paths() instead of
     Site.get_site_root_paths()
     """
     for (id, root_path, root_url) in self.get_site_root_paths():
         if self.url_path.startswith(root_path):
-            return ('' if current_site.id == id else root_url) + reverse('wagtail_serve',
-                                                                         args=(self.url_path[len(root_path):],))
+            return ('' if current_site.id == id else root_url) + \
+                reverse('wagtail_serve', args=(
+                    self.url_path[len(root_path):],))
 
 
 @property
 def _new_url(self):
     """
-    Return the 'most appropriate' URL for referring to this page from the pages we serve,
-    within the Wagtail backend and actual website templates;
-    this is the local URL (starting with '/') if we're only running a single site
-    (i.e. we know that whatever the current page is being served from, this link will be on the
-    same domain), and the full URL (with domain) if not.
-    Return None if the page is not routable.
+    Return the 'most appropriate' URL for referring to this page from the
+    pages we serve, within the Wagtail backend and actual website templates;
+    this is the local URL (starting with '/') if we're only running a single
+    site (i.e. we know that whatever the current page is being served from,
+    this link will be on the same domain), and the full URL (with domain) if
+    not. Return None if the page is not routable.
 
     Override for using custom get_site_root_paths() instead of
     Site.get_site_root_paths()
@@ -549,13 +565,17 @@ def _new_url(self):
                 'wagtail_serve', args=(self.url_path[len(root_path):],))
 
 
-def _validate_slugs(page, parent_page=None, slugs_to_check=None, exclude_self=True):
+def _validate_slugs(page, parent_page=None, slugs_to_check=None,
+                    exclude_self=True):
     """
     Determine whether the given slug is available for use on a child page of
     parent_page.
 
-    slugs_to_check: if used it must be a dict object where the keys are the translated slug fields and the values are what have to be checked
-        To be used if you want check specific values instead of the page's current slug values
+    slugs_to_check: if used it must be a dict object where the keys are the
+    translated slug fields and the values are what have to be checked
+
+    To be used if you want check specific values instead of the page's
+    current slug values
     """
     parent_page = page.get_parent() if parent_page is None else parent_page
 
@@ -575,8 +595,8 @@ def _validate_slugs(page, parent_page=None, slugs_to_check=None, exclude_self=Tr
         query_list = []
 
         for model in allowed_sibblings:
-            slug = slugs_to_check[current_slug] if slugs_to_check is not None else getattr(
-                page, current_slug, '') or ''
+            slug = slugs_to_check[current_slug] if slugs_to_check is not None \
+                else getattr(page, current_slug, '') or ''
             if len(slug) and model is not Page:
                 if model in WagtailTranslator._patched_models:
                     field_name = '{0}__{1}'.format(
@@ -586,8 +606,9 @@ def _validate_slugs(page, parent_page=None, slugs_to_check=None, exclude_self=Tr
                 kwargs = {field_name: slug}
                 query_list.append(Q(**kwargs))
 
-        if query_list and siblings.filter(reduce(operator.or_, query_list)).exists():
-            errors[current_slug] = _(u'Slug already in use')
+        if query_list and \
+           siblings.filter(reduce(operator.or_, query_list)).exists():
+            errors[current_slug] = _('Slug already in use')
 
     return errors
 
@@ -610,9 +631,11 @@ def _patch_elasticsearch_fields(model):
     for field in model.search_fields:
         # Check if the field is a SearchField and if it is one of the fields
         # registered for translation
-        if field.__class__ is SearchField and field.field_name in WagtailTranslator._translation_options.fields:
-            # If it is we create a clone of the original SearchField to keep all the defined options
-            # and replace its name by the translated one
+        if field.__class__ is SearchField and \
+           field.field_name in WagtailTranslator._translation_options.fields:
+            # If it is we create a clone of the original SearchField to keep
+            # all the defined options and replace its name by the translated
+            # one
             for lang in settings.LANGUAGES:
                 translated_field = copy.deepcopy(field)
                 translated_field.field_name = build_localized_fieldname(
