@@ -14,7 +14,7 @@ register = template.Library()
 
 # CHANGE LANGUAGE
 @register.simple_tag(takes_context=True)
-def change_lang(context, lang=None, *args, **kwargs):
+def translated_url(context, lang=None, *args, **kwargs):
     current_language = get_language()
 
     if 'request' in context and lang and current_language:
@@ -32,9 +32,7 @@ def change_lang(context, lang=None, *args, **kwargs):
                 request, path_components)
 
             with translation.override(lang):
-                raise ValueError(page.get_url_parts())
                 return page.url
-            # raise ValueError('')
 
         elif match.url_name == 'wagtailsearch_search':
             path_components = [
