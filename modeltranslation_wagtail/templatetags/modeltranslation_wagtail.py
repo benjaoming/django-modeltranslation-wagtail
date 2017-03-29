@@ -31,8 +31,26 @@ def translated_url(context, lang=None, *args, **kwargs):
             page, args, kwargs = request.site.root_page.specific.route(
                 request, path_components)
 
+            # for a routable page, args[0] is the method with the @route
+            # decorator, and args[2] the urlpaths captured by the regex in a
+            # dict of form { key (variable name) : value (variable value) }
+
+            if args:
+                # so far I will just support one extra path step,
+                # so len(args[2]) == 1
+                # TODO: more flexible support
+                # _suffix = '_slug'
+                # for _key, _value in iteritems(args[2]):
+                #     if _key.endswith(_suffix):
+                #         key = _key[:len(_suffix)]
+                #         value = _value
+                _, value = next(iteritems(args[2]))
+                snippet = page.SNIPPET_CLASS.objects.get(slug=value)
             with translation.override(lang):
-                return page.url
+                if args:
+                    return page.url + snippet.slug + '/'
+                else:
+                    return page.url
 
         elif match.url_name == 'wagtailsearch_search':
             path_components = [
