@@ -19,6 +19,7 @@ class TranslationOptions(TranslationOptionsOrig):
         """
         Create fields dicts without any translation fields.
         """
+
         # Extend local fields, this ensures that Wagtail Page models are always
         # extend on the local application, not on Wagtail itself (which would
         # cause us to need migrations on wagtailcore!)

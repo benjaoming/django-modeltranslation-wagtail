@@ -55,6 +55,14 @@ class WagtailTranslator(object):
         WagtailTranslator._base_model = model
         WagtailTranslator._required_fields = {}
 
+        # Based on:
+        # https://github.com/infoportugal/wagtail-modeltranslation/commit/
+        # e506050dd5650bff60c0d964bda7bf59485ded65
+        # Quick patch for Site models
+        if model.__name__ == 'Site':
+            model.get_site_root_paths = _new_get_site_root_paths
+            return
+
         if issubclass(model, Page):
             # This must be before the next edit_handler_class patch
             model.base_form_class = WagtailModeltranslationAdminPageForm
@@ -477,6 +485,23 @@ def _new_route(self, request, path_components):
     """
     Rewrite route method in order to handle languages fallbacks
     """
+
+    # Based on:
+    # https://github.com/infoportugal/wagtail-modeltranslation/commit/
+    # e506050dd5650bff60c0d964bda7bf59485ded65
+    if hasattr(self, 'resolve_subpage'):
+        if self.live:
+            try:
+                path = '/'
+                if path_components:
+                    path += '/'.join(path_components) + '/'
+
+                view, args, kwargs = self.resolve_subpage(path)
+                return RouteResult(self, args=(view, args, kwargs))
+
+            except Http404:
+                pass
+
     if path_components:
         # request is for a child of this page
         child_slug = path_components[0]
