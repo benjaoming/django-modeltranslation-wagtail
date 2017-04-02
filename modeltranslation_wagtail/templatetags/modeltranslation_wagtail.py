@@ -45,7 +45,7 @@ def translated_url(context, lang=None, *args, **kwargs):
                 #         key = _key[:len(_suffix)]
                 #         value = _value
                 _, value = next(iteritems(args[2]))
-                snippet = page.SNIPPET_CLASS.objects.get(slug=value)
+                snippet = page.SNIPPET_MODEL.objects.get(slug=value)
             with translation.override(lang):
                 if args:
                     return page.url + snippet.slug + '/'

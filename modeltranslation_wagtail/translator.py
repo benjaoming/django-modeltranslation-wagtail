@@ -1,6 +1,5 @@
-from modeltranslation.translator import TranslationOptions as TranslationOptionsOrig  # noqa
-from modeltranslation.translator import AlreadyRegistered
-from modeltranslation.translator import translator
+from modeltranslation.translator import AlreadyRegistered, \
+    TranslationOptions, translator
 
 from wagtail.wagtailcore.models import Page
 
@@ -13,7 +12,7 @@ except AlreadyRegistered:
     pass
 
 
-class TranslationOptions(TranslationOptionsOrig):
+class TranslationOptionsWagtail(TranslationOptions):
 
     def __init__(self, *args, **kwargs):
         """
@@ -31,4 +30,4 @@ class TranslationOptions(TranslationOptionsOrig):
             'title',
             'url_path'
         ]
-        super(TranslationOptions, self).__init__(*args, **kwargs)
+        super(TranslationOptionsWagtail, self).__init__(*args, **kwargs)
