@@ -35,19 +35,23 @@ def translated_url(context, lang=None, *args, **kwargs):
             # decorator, and args[2] the urlpaths captured by the regex in a
             # dict of form { key (variable name) : value (variable value) }
 
+            # TODO: maybe with try/catch?
             if args:
                 # so far I will just support one extra path step,
                 # so len(args[2]) == 1
                 # TODO: more flexible support
+                urlpaths_args = args[2]
+
                 # _suffix = '_slug'
                 # for _key, _value in iteritems(args[2]):
                 #     if _key.endswith(_suffix):
                 #         key = _key[:len(_suffix)]
                 #         value = _value
-                _, value = next(iteritems(args[2]))
-                snippet = page.SNIPPET_MODEL.objects.get(slug=value)
+                if urlpaths_args:
+                    _, value = next(iteritems(args[2]))
+                    snippet = page.SNIPPET_MODEL.objects.get(slug=value)
             with translation.override(lang):
-                if args:
+                if args and urlpaths_args:
                     return page.url + snippet.slug + '/'
                 else:
                     return page.url
