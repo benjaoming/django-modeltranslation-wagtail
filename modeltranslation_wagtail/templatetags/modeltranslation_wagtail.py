@@ -13,6 +13,8 @@ register = template.Library()
 
 
 # CHANGE LANGUAGE
+
+
 @register.simple_tag(takes_context=True)
 def translated_url(context, lang=None, *args, **kwargs):
     current_language = get_language()
@@ -35,11 +37,10 @@ def translated_url(context, lang=None, *args, **kwargs):
             # decorator, and args[2] the urlpaths captured by the regex in a
             # dict of form { key (variable name) : value (variable value) }
 
-            # TODO: maybe with try/catch?
             if args:
                 # so far I will just support one extra path step,
                 # so len(args[2]) == 1
-                # TODO: more flexible support
+                # TODO: more flexible support on urlpath args
                 urlpaths_args = args[2]
 
                 # _suffix = '_slug'
@@ -50,10 +51,44 @@ def translated_url(context, lang=None, *args, **kwargs):
                 if urlpaths_args:
                     _, value = next(iteritems(args[2]))
                     snippet = page.SNIPPET_MODEL.objects.get(slug=value)
-            with translation.override(lang):
-                if args and urlpaths_args:
-                    return page.url + snippet.slug + '/'
                 else:
+                    # TODO: more flexible support on extra path components
+                    extra_path_component = None
+                    if len(path_components) == 1 and \
+                       page.id == request.site.root_page.id:
+                        # routing root '/', so root is a RoutablePageMixin,
+                        # and path_components[0] is some pattern to be
+                        # matched with one of root's @route methods
+                        extra_path_component = path_components[0]
+                    elif len(path_components) == 2:
+                        # with our @route patterns, each page only matches one
+                        # path component, so we here we are sure not routing
+                        # root. We are actually routing a page plus an extra
+                        # path component, so path_components[0] will be the
+                        # page's url and path_components[1] the extra to be
+                        # matched with one of the page's @route method.s
+                        extra_path_component = path_components[1]
+
+                    if extra_path_component:
+                        # get the name of the @route method (language
+                        # independent) so we can reverse patterns later in
+                        # another language
+                        subpage_view_name = page.resolve_subpage(
+                            '/' + extra_path_component + '/')[0].__name__
+
+            with translation.override(lang):
+                if urlpaths_args:
+                    # filter by category, pass slugs as args, captured in
+                    # urlpaths_args
+                    return page.url + snippet.slug + '/'
+                elif extra_path_component:
+                    # RoutablePageMixin with an extra path componnent, use the
+                    # name of the view that we extracted in order to get the
+                    # extra url component in the new language
+                    return page.url + page.reverse_subpage(subpage_view_name)
+                else:
+                    # just return the page url
+                    # TODO: more flexible support
                     return page.url
 
         elif match.url_name == 'wagtailsearch_search':
