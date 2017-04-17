@@ -1,7 +1,9 @@
-from django.conf.urls import url
-from django.http.response import HttpResponse
+from django.conf.urls import url, include
+from django.conf.urls.i18n import i18n_patterns
+
+from wagtail.wagtailcore import urls as wagtail_urls
 
 
-urlpatterns = [
-    url("/", lambda x: HttpResponse("hej")),
-]
+urlpatterns = i18n_patterns(
+    url("", include(wagtail_urls)),
+)

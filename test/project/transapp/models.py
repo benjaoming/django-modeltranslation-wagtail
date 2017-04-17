@@ -1,4 +1,5 @@
-from wagtail.wagtailcore.models import Page
+from modeltranslation_wagtail.models import TranslatedPage
 
-class Test(Page):
-    pass 
+
+class Test(TranslatedPage):
+    pass
