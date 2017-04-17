@@ -3,13 +3,29 @@
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'kiks',
     }
 }
 
 DEBUG = True
 
 SITE_ID = 1
+
+USE_I18N = True
+
+LANGUAGE_CODE = 'da'
+LANGUAGES = [
+    ('da', 'Dansk'),
+    ('en', 'English'),
+    ('en_AU', 'Aussie'),
+    ('de', 'German'),
+    ('nb', 'Norsk Bokmål'),
+]
+
+MODELTRANSLATION_FALLBACK_LANGUAGES = {
+    'default': ('en', 'de',),
+    'en_AU': ('en',),
+    'da': ('nb',)
+}
 
 ROOT_URLCONF = 'project.urls'
 
@@ -34,7 +50,7 @@ INSTALLED_APPS = [
     'wagtail.wagtailcore',
     'wagtail.contrib.wagtailsitemaps',
     'wagtail.contrib.wagtailstyleguide',
-    
+    'taggit',    
 ]
 MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
