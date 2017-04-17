@@ -1,5 +1,7 @@
-# Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
