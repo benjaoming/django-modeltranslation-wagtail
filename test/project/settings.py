@@ -32,7 +32,6 @@ MODELTRANSLATION_FALLBACK_LANGUAGES = {
 ROOT_URLCONF = 'project.urls'
 
 INSTALLED_APPS = [
-    'project.transapp',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -54,6 +53,7 @@ INSTALLED_APPS = [
     'wagtail.contrib.wagtailsitemaps',
     'wagtail.contrib.wagtailstyleguide',
     'taggit',    
+    'test.transapp',
 ]
 MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',

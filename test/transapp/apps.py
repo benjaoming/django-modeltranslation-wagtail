@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 from django.apps.config import AppConfig
 
 
-class TransAppConfig(AppConfig):
+class TransappConfig(AppConfig):
     name = 'transapp'
     verbose_name = "Kiks"

@@ -1,5 +1,5 @@
 from modeltranslation import settings as mt_settings
-from modeltranslation.utils import build_localized_fieldname, get_language
+from modeltranslation.utils import build_localized_fieldname
 from wagtail.wagtailcore.models import Page
 
 class TranslatedPage(Page):

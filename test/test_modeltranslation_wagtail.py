@@ -1,15 +1,14 @@
 """
 Tests for `modeltranslation_wagtail` module.
 """
-import pytest
-
-
-from project.transapp import models
 from django.conf import settings
 from django.test.testcases import TestCase
 from django.utils import translation
 from wagtail.wagtailcore.models import Page
 from django.http.response import HttpResponseRedirect
+
+from .transapp import models
+
 
 class TestModeltranslation_wagtail(TestCase):
 
