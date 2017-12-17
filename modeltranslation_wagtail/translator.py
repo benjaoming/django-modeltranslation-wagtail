@@ -26,8 +26,6 @@ class TranslationOptions(TranslationOptionsOrig):
         self.fields += [
             'search_description',
             'seo_title',
-            'slug',
             'title',
-            'url_path'
         ]
         super(TranslationOptions, self).__init__(*args, **kwargs)

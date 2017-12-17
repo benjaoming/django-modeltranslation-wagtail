@@ -17,7 +17,7 @@ class TestModeltranslation_wagtail(TestCase):
         pass
 
     def test_modeltranslation_setup(self):
-        self.assertTrue(hasattr(models.Test, 'slug_en'))
+        self.assertTrue(hasattr(models.Test, 'title_en'))
 
     def test_default_language(self):
         root = Page.get_first_root_node()
