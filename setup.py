@@ -28,7 +28,7 @@ setup(
     long_description=readme + '\n\n' + doclink + '\n\n' + history,
     author='Benjamin Bach',
     author_email='benjamin@overtag.dk',
-    url='https://github.com/benjaoming/modeltranslation_wagtail',
+    url='https://github.com/benjaoming/django-modeltranslation-wagtail',
     packages=[
         'modeltranslation_wagtail',
     ],
@@ -52,5 +52,7 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: Implementation :: PyPy',
+        'Framework :: Django',
+        'Topic :: Software Development :: Internationalization',
     ],
 )
