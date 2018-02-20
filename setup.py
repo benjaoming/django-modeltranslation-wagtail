@@ -18,7 +18,7 @@ doclink = """
 Documentation
 -------------
 
-The full documentation is at http://modeltranslation_wagtail.rtfd.org."""
+See: http://django-modeltranslation-wagtail.readthedocs.io/"""
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
