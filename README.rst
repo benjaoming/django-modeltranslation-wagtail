@@ -1,6 +1,5 @@
-=============================
 django-modeltranslation-wagtail
-=============================
+===============================
 
 .. image:: https://readthedocs.org/projects/django-modeltranslation-wagtail/badge/?version=latest
    :target: http://django-modeltranslation-wagtail.readthedocs.io
@@ -22,8 +21,14 @@ Features
 * **TODO** Makes translated fields easily accessible to the Wagtail admin.
 * Sensible to the currently activated language.
 
+
 When to use this
 ----------------
+
+Actually, you might not want to use this! Consider carefully to use
+`wagtail-modeltranslation <https://github.com/infoportugal/wagtail-modeltranslation/>`__ as it has
+substantially improved by not hard-copying ``django-modeltranslation`` anymore.
+They are still pretty bad at responding to external contributions, though.
 
 If you need to have 1:1 translation for Pages or Snippets in Wagtail, you could use django-modeltranslation.
 
@@ -34,17 +39,18 @@ If you ONLY plan to use one kind of translation mechanism, you should also caref
 `wagtailtrans <https://github.com/LUKKIEN/wagtailtrans>`__. This project is really nice if you have already
 used other approaches and want to mix both what wagtailtrans calls *freeform* and *synchronized* trees.
 
+
 Background
 ----------
 
 Originally, I was using `wagtail-modeltranslation <https://github.com/infoportugal/wagtail-modeltranslation/>`__.
 The project has been sparsely maintained, but more seriously, it was monkey-patching Wagtail and using a hard-copy
-of the modeltranslation codebase instead of a dependency reference to django-modeltranslation.
-
-Predictably, the project became unmaintainable and caused incompatibilities down the road.
+of the modeltranslation codebase instead of a dependency reference to django-modeltranslation. The latter has
+now been restored, which as lowered the motivation for this project.
 
 This project introduces a bit of naming hell. But remember it like this: *django-modeltranslation-wagtail* has
 wagtail at the end because it depends on *django-modeltranslation*, which depends on *django*.
+
 
 Using django-modeltranslation or wagtail-modeltranslation?
 ----------------------------------------------------------
