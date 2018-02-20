@@ -23,7 +23,7 @@ history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
     name='django-modeltranslation-wagtail',
-    version='0.2.0',
+    version='0.2.1',
     description='The glue between django-modeltranslation and wagtail',
     long_description=readme + '\n\n' + doclink + '\n\n' + history,
     author='Benjamin Bach',
