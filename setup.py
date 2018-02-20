@@ -14,18 +14,12 @@ if sys.argv[-1] == 'publish':
     sys.exit()
 
 readme = open('README.rst').read()
-doclink = """
-Documentation
--------------
-
-See: http://django-modeltranslation-wagtail.readthedocs.io/"""
-history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
     name='django-modeltranslation-wagtail',
     version='0.2.1',
     description='The glue between django-modeltranslation and wagtail',
-    long_description=readme + '\n\n' + doclink + '\n\n' + history,
+    long_description=readme,
     author='Benjamin Bach',
     author_email='benjamin@overtag.dk',
     url='https://github.com/benjaoming/django-modeltranslation-wagtail',
