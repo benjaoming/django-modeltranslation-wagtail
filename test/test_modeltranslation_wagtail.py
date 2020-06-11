@@ -26,7 +26,7 @@ class TestModeltranslation_wagtail(TestCase):
         _created = models.Test(
             title=title_en,
             slug="test",
-            url_path='/kiks/',
+            url_path='/test/',
         )
         _created = root.add_child(instance=_created)
         test_object = models.Test.objects.get(id=_created.id)
