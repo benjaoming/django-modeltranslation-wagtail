@@ -11,15 +11,8 @@ python:
   - 3.7
   - 3.8
 
-# See tox.ini for env list
-env:
-- TOXENV=py36
-- TOXENV=py37
-- TOXENV=py38
-- TOXENV=style
-
 install:
   - pip install tox tox-travis
 
 script:
-  - tox -e $TOXENV
+  - tox
