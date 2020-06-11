@@ -17,7 +17,7 @@ readme = open('README.rst').read()
 
 setup(
     name='django-modeltranslation-wagtail',
-    version='0.2.1',
+    version='0.3',
     description='The glue between django-modeltranslation and wagtail',
     long_description=readme,
     author='Benjamin Bach',
@@ -29,7 +29,7 @@ setup(
     package_dir={'modeltranslation_wagtail': 'modeltranslation_wagtail'},
     include_package_data=True,
     install_requires=[
-        'wagtail>=1.8',
+        'wagtail>=2.0',
         'django-modeltranslation>=0.12',
     ],
     license='MIT',
@@ -40,11 +40,7 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Framework :: Django',
         'Topic :: Software Development :: Internationalization',

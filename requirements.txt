@@ -1,7 +1,7 @@
 # Requirements for dev environment
 wheel>=0.22
 django-modeltranslation>=0.12
-wagtail>=1.8
+wagtail>=2.0
 pytest
 pytest-django
 pytest-pythonpath

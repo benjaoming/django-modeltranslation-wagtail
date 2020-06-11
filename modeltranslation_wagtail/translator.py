@@ -2,7 +2,7 @@ from modeltranslation.translator import TranslationOptions as TranslationOptions
 from modeltranslation.translator import AlreadyRegistered
 from modeltranslation.translator import translator
 
-from wagtail.wagtailcore.models import Page
+from wagtail.core.models import Page
 
 
 # Ensure that the Page model is registered for translation when this module is
