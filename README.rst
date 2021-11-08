@@ -28,7 +28,6 @@ When to use this
 Actually, you might not want to use this! Consider carefully to use
 `wagtail-modeltranslation <https://github.com/infoportugal/wagtail-modeltranslation/>`__ as it has
 substantially improved by not hard-copying ``django-modeltranslation`` anymore.
-They are still pretty bad at responding to external contributions, though.
 
 If you need to have 1:1 translation for Pages or Snippets in Wagtail, you could use django-modeltranslation.
 
