@@ -1,0 +1,22 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@0.2.1
+
+jobs:
+  build-and-test:
+    executor: python/default
+    steps:
+      - checkout
+      - run:
+          command: pip install tox
+          name: Install dependencies
+      - run:
+          command: tox
+          name: Run tox
+
+
+workflows:
+  main:
+    jobs:
+      - build-and-test
