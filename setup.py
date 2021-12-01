@@ -17,7 +17,7 @@ readme = open('README.rst').read()
 
 setup(
     name='django-modeltranslation-wagtail',
-    version='0.3',
+    version='0.4',
     description='The glue between django-modeltranslation and wagtail',
     long_description=readme,
     author='Benjamin Bach',
