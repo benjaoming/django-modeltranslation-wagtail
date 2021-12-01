@@ -7,8 +7,8 @@ django-modeltranslation-wagtail
 .. image:: https://badge.fury.io/py/django-modeltranslation-wagtail.png
     :target: http://badge.fury.io/py/django-modeltranslation-wagtail
 
-.. image:: https://travis-ci.org/benjaoming/django-modeltranslation-wagtail.png?branch=master
-    :target: https://travis-ci.org/benjaoming/django-modeltranslation-wagtail
+.. |Build status| image:: https://circleci.com/gh/benjaoming/django-modeltranslation-wagtail.svg?style=shield
+   :target: https://circleci.com/gh/benjaoming/django-modeltranslation-wagtail
 
 
 The glue between django-modeltranslation and wagtail
