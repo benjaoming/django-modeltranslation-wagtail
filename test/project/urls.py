@@ -1,9 +1,9 @@
-from django.conf.urls import url, include
+from django.urls import path, include
 from django.conf.urls.i18n import i18n_patterns
 
 from wagtail.core import urls as wagtail_urls
 
 
 urlpatterns = i18n_patterns(
-    url("", include(wagtail_urls)),
+    path("", include(wagtail_urls)),
 )
