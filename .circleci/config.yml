@@ -4,20 +4,28 @@ orbs:
   python: circleci/python@1.5.0
 
 jobs:
-  build-and-test:
-    executor: python/default
+  tox:
+    parameters:
+      tox_env:
+        description: "Name of Tox environment to run"
+        default: "py38"
+        type: string
+      python_version:
+        description: "Python version string"
+        default: "3.8"
+        type: string
+    description: "Reusable job for invoking tox"
+    docker:
+    - image: circleci/python:<<parameters.python_version>>
     steps:
       - checkout
-      - run:
-          command: pip install tox
-          name: Install dependencies
-      - run:
-          command: tox
-          name: Run tox
-
-
+      - run: pip install tox && tox -e <<parameters.tox_env>>
 workflows:
   main:
     jobs:
-      - build-and-test
-      - version: 3.8
+      - tox:
+          tox_env: "py38"
+          python_version: "3.8"
+      - tox:
+          tox_env: "py39"
+          python_version: "3.9"
