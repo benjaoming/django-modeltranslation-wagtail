@@ -3,5 +3,5 @@ wheel>=0.22
 django-modeltranslation>=0.12
 wagtail>=2.0
 pytest
-pytest-django
+pytest-django>=4.5.2
 pytest-pythonpath
