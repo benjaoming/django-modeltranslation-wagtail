@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'taggit',
     'test.transapp',
     'test.anotherapp',  # Tests cross-app integration
+    'test.appwithoutmigrations',
 ]
 
 MIDDLEWARE = [
