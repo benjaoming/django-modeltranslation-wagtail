@@ -2,10 +2,10 @@ django-modeltranslation-wagtail
 ===============================
 
 .. image:: https://readthedocs.org/projects/django-modeltranslation-wagtail/badge/?version=latest
-    :target: http://django-modeltranslation-wagtail.readthedocs.io
+    :target: https://django-modeltranslation-wagtail.readthedocs.io
 
-.. image:: https://badge.fury.io/py/django-modeltranslation-wagtail.png
-    :target: http://badge.fury.io/py/django-modeltranslation-wagtail
+.. image:: https://badge.fury.io/py/django-modeltranslation-wagtail.svg
+    :target: https://badge.fury.io/py/django-modeltranslation-wagtail
 
 .. image:: https://circleci.com/gh/benjaoming/django-modeltranslation-wagtail.svg?style=shield
     :target: https://circleci.com/gh/benjaoming/django-modeltranslation-wagtail
