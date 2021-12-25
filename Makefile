@@ -34,10 +34,9 @@ coverage:
 docs:
 	rm -f docs/modeltranslation_wagtail.rst
 	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ modeltranslation_wagtail
+	PYTHONPATH="$PYTHONPATH:." DJANGO_SETTINGS_MODULE="test.settings" sphinx-apidoc -o docs/ modeltranslation_wagtail
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
-	open docs/_build/html/index.html
 
 release: clean
 	python setup.py sdist

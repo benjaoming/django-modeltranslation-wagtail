@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # complexity documentation build configuration file, created by
 # sphinx-quickstart on Tue Jul  9 22:26:36 2013.
@@ -33,6 +32,12 @@ import modeltranslation_wagtail
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode']
 
+
+# Make sphinx-apidocs work by configuring a django project
+os.environ["DJANGO_SETTINGS_MODULE"] = "test.project.settings"
+import django
+django.setup()
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -46,10 +51,12 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'django-modeltranslation-wagtail'
-copyright = u'2017, Benjamin Bach'
+project = 'django-modeltranslation-wagtail'
 
-# The version info for the project you're documenting, acts as replacement for
+from datetime import datetime
+copyright = "{}, Benjamin Balder Bach".format(datetime.now().year)
+
+# The version info for the project yo're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
@@ -192,8 +199,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'modeltranslation_wagtail.tex', u'django-modeltranslation-wagtail Documentation',
-   u'Benjamin Bach', 'manual'),
+  ('index', 'modeltranslation_wagtail.tex', 'django-modeltranslation-wagtail Documentation',
+   'Benjamin Balder Bach', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -222,8 +229,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'modeltranslation_wagtail', u'django-modeltranslation-wagtail Documentation',
-     [u'Benjamin Bach'], 1)
+    ('index', 'modeltranslation_wagtail', 'django-modeltranslation-wagtail Documentation',
+     ['Benjamin Balder Bach'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -236,8 +243,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'modeltranslation_wagtail', u'django-modeltranslation-wagtail Documentation',
-   u'Benjamin Bach', 'modeltranslation_wagtail', 'One line description of project.',
+  ('index', 'modeltranslation_wagtail', 'django-modeltranslation-wagtail Documentation',
+   'Benjamin Balder Bach', 'modeltranslation_wagtail', 'One line description of project.',
    'Miscellaneous'),
 ]
 

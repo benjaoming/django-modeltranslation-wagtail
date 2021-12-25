@@ -5,14 +5,15 @@
 
 .. include:: ../README.rst
 
-Contents:
-=========
+Contents
+========
 
 .. toctree::
    :maxdepth: 2
 
    installation
    usage
+   modules
    contributing
    history
 

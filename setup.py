@@ -1,7 +1,8 @@
 #!/usr/bin/env python
-
 import os
 import sys
+
+import modeltranslation_wagtail
 
 try:
     from setuptools import setup
@@ -17,7 +18,7 @@ readme = open('README.rst').read()
 
 setup(
     name='django-modeltranslation-wagtail',
-    version='0.4',
+    version=modeltranslation_wagtail.__version__,
     description='The glue between django-modeltranslation and wagtail',
     long_description=readme,
     author='Benjamin Bach',
