@@ -5,9 +5,9 @@ Usage
 In your Django settings, you need to add the following ::
 
     INSTALLED_APPS = [
-        # ...
-        "modeltranslation",
+        # NOTE THE ORDER - IT MATTERS!
         "modeltranslation_wagtail",
+        "modeltranslation",
     ]
 
 To use django-modeltranslation-wagtail in ``myapp.translation`` ::
