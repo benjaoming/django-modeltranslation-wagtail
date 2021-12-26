@@ -3,6 +3,20 @@
 History
 -------
 
+0.4.1 (2021-12-24)
+++++++++++++++++++
+
+* Support for Wagtail StreamField
+* Very sparse documentation (please do help to expand)
+
+
+0.4 (2021-12-24)
+++++++++++++++++
+
+* New tests
+* Updates for Django 3 and Wagtail 2+
+
+
 0.2.1 (2018-02-20)
 ++++++++++++++++++
 
